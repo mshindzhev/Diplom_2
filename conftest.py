@@ -1,12 +1,12 @@
 import pytest
 
 import data
-from methods.delete_methods import DeleteMethods
+from methods.user_methods import UserMethods
 from methods.register_methods import RegisterMethods
 
 
-# @pytest.fixture
-# def register_user():
-#     register_user = RegisterMethods()
-#     yield register_user.user_registration(email=data.EMAIL, password=data.PASSWORD, name=data.NAME)
-#     DeleteMethods.delete_user()
+@pytest.fixture
+def create_user():
+    create_user = RegisterMethods().user_registration(data.EMAIL, data.PASSWORD, data.NAME, False)
+    yield create_user
+    UserMethods.delete_user(create_user[1]['accessToken'])

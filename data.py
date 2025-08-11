@@ -3,7 +3,10 @@
 BASE_URL = 'https://stellarburgers.nomoreparties.site/api'
 REGISTER_URL = '/register'
 USER_URL = '/user'
-EMAIL = 'testulak@loli.ru'
+LOGIN_URL = '/login'
+EMAIL = 'testakulaa@loli.ru'
 PASSWORD = 'qwerty123'
-NAME = 'МишGaNg2003'
-ERROR_REQUIRED_FIELDS = '{"success": false,"message": "Email, password and name are required fields"}'
+NAME = 'МишGaNg2000'
+ERROR_REQUIRED_FIELDS = {'message': 'Email, password and name are required fields', 'success': False}
+INVALID_EMAIL = 'invalid@loli.ru'
+INVALID_PASSWORD = 'qwerty1230'

@@ -6,9 +6,12 @@ from methods.register_methods import RegisterMethods
 
 class TestRegister:
 
-    def test_register_unique_user(self):
-        register_user = RegisterMethods().user_registration()
-        assert register_user[0] == 200 and register_user[1]['success'] == True
+    def test_register_unique_user(self, create_user):
+        assert create_user[0] == 200 and create_user[1]['success'] == True
+
+    def test_register_not_unique_user(self, create_user):
+        not_unique_user = RegisterMethods().user_registration(data.EMAIL, data.PASSWORD, data.NAME, False)
+        assert not_unique_user[0] == 403 and not_unique_user[1]['success'] == False
 
     @pytest.mark.parametrize(
         'email, password, name, need_generate_data',
@@ -19,5 +22,5 @@ class TestRegister:
         ]
     )
     def test_register_with_not_filled_fields(self, email, password, name, need_generate_data):
-        data_register = RegisterMethods.user_registration(email, password, name, need_generate_data)
-        assert data_register.status_code == 403 and data_register.text == data.ERROR_REQUIRED_FIELDS
+        user_with_not_filled_fields = RegisterMethods.user_registration(email, password, name, need_generate_data)
+        assert user_with_not_filled_fields[0] == 403 and user_with_not_filled_fields[1] == data.ERROR_REQUIRED_FIELDS
